@@ -285,7 +285,7 @@ switch(eventType) {
     finalItems = jsonData;
     break;
 
-  case 'begin_checkout':
+  case 'Cart.checkout':
   jsonData = [];
   productsArray = data.transactionProducts;
   if (productsArray && productsArray.length > 0) {

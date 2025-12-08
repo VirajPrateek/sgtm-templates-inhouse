@@ -38,8 +38,8 @@
         "displayValue": "gameMultiplier"
       },
       {
-        "value": "begin_checkout",
-        "displayValue": "begin_checkout"
+        "value": "Cart.checkout",
+        "displayValue": "Cart.checkout"
       }
     ],
     "simpleValueType": true
@@ -104,7 +104,7 @@
           },
           {
             "paramName": "eventType",
-            "paramValue": "begin_checkout",
+            "paramValue": "Cart.checkout",
             "type": "EQUALS"
           }
         ]

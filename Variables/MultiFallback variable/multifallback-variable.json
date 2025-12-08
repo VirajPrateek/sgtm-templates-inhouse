@@ -1,0 +1,39 @@
+[
+  {
+    "type": "SIMPLE_TABLE",
+    "name": "simpleTable1",
+    "displayName": "Fallback variables",
+    "simpleTableColumns": [
+      {
+        "defaultValue": "",
+        "displayName": "Variable to test",
+        "name": "value1",
+        "type": "TEXT"
+      },
+      {
+        "defaultValue": "",
+        "displayName": "Validate against",
+        "name": "validation1",
+        "type": "SELECT",
+        "selectItems": [
+          {
+            "value": "default",
+            "displayValue": "Default (null/undefined/empty/\"not applicable\"/\"na\")"
+          },
+          {
+            "value": "nullundefined",
+            "displayValue": "Only null or undefined"
+          },
+          {
+            "value": "numeric",
+            "displayValue": "Number Only"
+          },
+          {
+            "value": "none",
+            "displayValue": "None (Always valid)"
+          }
+        ]
+      }
+    ]
+  }
+]
