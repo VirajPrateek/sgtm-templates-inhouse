@@ -1,15 +1,23 @@
-function evaluate(variable, operator, value) {
-  if (!variable) return false;
+// Template functions
+function evaluate(variable, checkType, value) {
+  if (variable === null || variable === undefined) {
+    return checkType === 'falsy';
+  }
   
   var varStr = '' + variable;
-  var valStr = '' + value;
   
-  if (operator === '==') {
-    return varStr === valStr;
-  } else if (operator === '!=') {
-    return varStr !== valStr;
-  } else if (operator === 'contains') {
-    return varStr.indexOf(valStr) !== -1;
+  if (checkType === '==') {
+    return varStr === value || variable === true || variable === 1;
+  } else if (checkType === '!=') {
+    return varStr !== value;
+  } else if (checkType === 'contains') {
+    return varStr.indexOf(value) !== -1;
+  } else if (checkType === 'truthy') {
+    // Truthy: true, "true", 1, or non-empty string
+    return variable === true || variable === "true" || variable === 1 || (typeof variable === 'string' && varStr.trim() !== '');
+  } else if (checkType === 'falsy') {
+    // Falsy: false, "false", 0, empty string, null, undefined
+    return variable === false || variable === "false" || variable === 0 || varStr.trim() === '' || variable === null || variable === undefined;
   }
   return false;
 }
@@ -19,14 +27,14 @@ function evaluateGroup(conditions, logic) {
   
   if (logic === 'OR') {
     for (var i = 0; i < conditions.length; i++) {
-      if (evaluate(conditions[i].variable, conditions[i].operator, conditions[i].value)) {
+      if (evaluate(conditions[i].variable, conditions[i].checkType, conditions[i].value)) {
         return true;
       }
     }
     return false;
   } else {
     for (var i = 0; i < conditions.length; i++) {
-      if (!evaluate(conditions[i].variable, conditions[i].operator, conditions[i].value)) {
+      if (!evaluate(conditions[i].variable, conditions[i].checkType, conditions[i].value)) {
         return false;
       }
     }

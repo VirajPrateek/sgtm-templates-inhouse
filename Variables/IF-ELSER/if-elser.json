@@ -18,18 +18,20 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Operator",
-            "name": "operator",
+            "displayName": "Check Type",
+            "name": "checkType",
             "type": "SELECT",
             "selectItems": [
               {"value": "==", "displayValue": "equals (==)"},
               {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"}
+              {"value": "contains", "displayValue": "contains"},
+              {"value": "truthy", "displayValue": "is truthy"},
+              {"value": "falsy", "displayValue": "is falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value",
+            "displayName": "Value (not needed for truthy/falsy)",
             "name": "value",
             "type": "TEXT"
           }
@@ -72,18 +74,20 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Operator",
-            "name": "operator",
+            "displayName": "Check Type",
+            "name": "checkType",
             "type": "SELECT",
             "selectItems": [
               {"value": "==", "displayValue": "equals (==)"},
               {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"}
+              {"value": "contains", "displayValue": "contains"},
+              {"value": "truthy", "displayValue": "is truthy"},
+              {"value": "falsy", "displayValue": "is falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value",
+            "displayName": "Value (not needed for truthy/falsy)",
             "name": "value",
             "type": "TEXT"
           }
@@ -126,18 +130,20 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Operator",
-            "name": "operator",
+            "displayName": "Check Type",
+            "name": "checkType",
             "type": "SELECT",
             "selectItems": [
               {"value": "==", "displayValue": "equals (==)"},
               {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"}
+              {"value": "contains", "displayValue": "contains"},
+              {"value": "truthy", "displayValue": "is truthy"},
+              {"value": "falsy", "displayValue": "is falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value",
+            "displayName": "Value (not needed for truthy/falsy)",
             "name": "value",
             "type": "TEXT"
           }
