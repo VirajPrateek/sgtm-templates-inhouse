@@ -1,0 +1,170 @@
+[
+  {
+    "type": "GROUP",
+    "name": "conditionGroup1",
+    "displayName": "IF",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "conditions1",
+        "displayName": "Conditions",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Variable",
+            "name": "variable",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "==",
+            "displayName": "Operator",
+            "name": "operator",
+            "type": "SELECT",
+            "selectItems": [
+              {"value": "==", "displayValue": "equals (==)"},
+              {"value": "!=", "displayValue": "not equals (!=)"},
+              {"value": "contains", "displayValue": "contains"}
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ]
+      },
+      {
+        "type": "SELECT",
+        "name": "logic1",
+        "displayName": "Between conditions",
+        "defaultValue": "OR",
+        "selectItems": [
+          {"value": "OR", "displayValue": "OR"},
+          {"value": "AND", "displayValue": "AND"}
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "return1",
+        "displayName": "Return Value",
+        "defaultValue": ""
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "conditionGroup2",
+    "displayName": "ELSE IF",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "conditions2",
+        "displayName": "Conditions",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Variable",
+            "name": "variable",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "==",
+            "displayName": "Operator",
+            "name": "operator",
+            "type": "SELECT",
+            "selectItems": [
+              {"value": "==", "displayValue": "equals (==)"},
+              {"value": "!=", "displayValue": "not equals (!=)"},
+              {"value": "contains", "displayValue": "contains"}
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ]
+      },
+      {
+        "type": "SELECT",
+        "name": "logic2",
+        "displayName": "Between conditions",
+        "defaultValue": "OR",
+        "selectItems": [
+          {"value": "OR", "displayValue": "OR"},
+          {"value": "AND", "displayValue": "AND"}
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "return2",
+        "displayName": "Return Value",
+        "defaultValue": ""
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "conditionGroup3",
+    "displayName": "ELSE IF",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "conditions3",
+        "displayName": "Conditions",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Variable",
+            "name": "variable",
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "==",
+            "displayName": "Operator",
+            "name": "operator",
+            "type": "SELECT",
+            "selectItems": [
+              {"value": "==", "displayValue": "equals (==)"},
+              {"value": "!=", "displayValue": "not equals (!=)"},
+              {"value": "contains", "displayValue": "contains"}
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ]
+      },
+      {
+        "type": "SELECT",
+        "name": "logic3",
+        "displayName": "Between conditions",
+        "defaultValue": "OR",
+        "selectItems": [
+          {"value": "OR", "displayValue": "OR"},
+          {"value": "AND", "displayValue": "AND"}
+        ]
+      },
+      {
+        "type": "TEXT",
+        "name": "return3",
+        "displayName": "Return Value",
+        "defaultValue": ""
+      }
+    ]
+  },
+  {
+    "type": "TEXT",
+    "name": "defaultReturn",
+    "displayName": "ELSE - Default Return Value",
+    "defaultValue": ""
+  }
+]
