@@ -29,6 +29,10 @@
             "displayValue": "Number Only"
           },
           {
+            "value": "customerid",
+            "displayValue": "Valid Customer ID (number or numeric string)"
+          },
+          {
             "value": "none",
             "displayValue": "None (Always valid)"
           }
