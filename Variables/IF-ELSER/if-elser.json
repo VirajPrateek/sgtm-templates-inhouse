@@ -22,11 +22,26 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "equals (==)"},
-              {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"},
-              {"value": "truthy", "displayValue": "is truthy"},
-              {"value": "falsy", "displayValue": "is falsy"}
+              {
+                "value": "==",
+                "displayValue": "equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "not equals (!=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "contains"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "is truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "is falsy"
+              }
             ]
           },
           {
@@ -43,8 +58,14 @@
         "displayName": "Between conditions",
         "defaultValue": "OR",
         "selectItems": [
-          {"value": "OR", "displayValue": "OR"},
-          {"value": "AND", "displayValue": "AND"}
+          {
+            "value": "OR",
+            "displayValue": "OR"
+          },
+          {
+            "value": "AND",
+            "displayValue": "AND"
+          }
         ]
       },
       {
@@ -78,11 +99,26 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "equals (==)"},
-              {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"},
-              {"value": "truthy", "displayValue": "is truthy"},
-              {"value": "falsy", "displayValue": "is falsy"}
+              {
+                "value": "==",
+                "displayValue": "equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "not equals (!=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "contains"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "is truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "is falsy"
+              }
             ]
           },
           {
@@ -99,8 +135,14 @@
         "displayName": "Between conditions",
         "defaultValue": "OR",
         "selectItems": [
-          {"value": "OR", "displayValue": "OR"},
-          {"value": "AND", "displayValue": "AND"}
+          {
+            "value": "OR",
+            "displayValue": "OR"
+          },
+          {
+            "value": "AND",
+            "displayValue": "AND"
+          }
         ]
       },
       {
@@ -134,11 +176,26 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "equals (==)"},
-              {"value": "!=", "displayValue": "not equals (!=)"},
-              {"value": "contains", "displayValue": "contains"},
-              {"value": "truthy", "displayValue": "is truthy"},
-              {"value": "falsy", "displayValue": "is falsy"}
+              {
+                "value": "==",
+                "displayValue": "equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "not equals (!=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "contains"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "is truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "is falsy"
+              }
             ]
           },
           {
@@ -155,8 +212,14 @@
         "displayName": "Between conditions",
         "defaultValue": "OR",
         "selectItems": [
-          {"value": "OR", "displayValue": "OR"},
-          {"value": "AND", "displayValue": "AND"}
+          {
+            "value": "OR",
+            "displayValue": "OR"
+          },
+          {
+            "value": "AND",
+            "displayValue": "AND"
+          }
         ]
       },
       {
@@ -170,7 +233,6 @@
   {
     "type": "TEXT",
     "name": "defaultReturn",
-    "displayName": "ELSE - Default Return Value",
-    "defaultValue": ""
+    "displayName": "ELSE - Default Return Value"
   }
 ]
