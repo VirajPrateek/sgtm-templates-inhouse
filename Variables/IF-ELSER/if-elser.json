@@ -18,35 +18,23 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Check Type",
+            "displayName": "Operator",
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {
-                "value": "==",
-                "displayValue": "equals (==)"
-              },
-              {
-                "value": "!=",
-                "displayValue": "not equals (!=)"
-              },
-              {
-                "value": "contains",
-                "displayValue": "contains"
-              },
-              {
-                "value": "truthy",
-                "displayValue": "is truthy"
-              },
-              {
-                "value": "falsy",
-                "displayValue": "is falsy"
-              }
+              {"value": "==", "displayValue": "Equals (==)"},
+              {"value": "!=", "displayValue": "Does not equal (!=)"},
+              {"value": "contains", "displayValue": "Contains"},
+              {"value": "does_not_contain", "displayValue": "Does not contain"},
+              {"value": "starts_with", "displayValue": "Starts with"},
+              {"value": "ends_with", "displayValue": "Ends with"},
+              {"value": "truthy", "displayValue": "Is Truthy"},
+              {"value": "falsy", "displayValue": "Is Falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value (not needed for truthy/falsy)",
+            "displayName": "Value",
             "name": "value",
             "type": "TEXT"
           }
@@ -95,35 +83,23 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Check Type",
+            "displayName": "Operator",
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {
-                "value": "==",
-                "displayValue": "equals (==)"
-              },
-              {
-                "value": "!=",
-                "displayValue": "not equals (!=)"
-              },
-              {
-                "value": "contains",
-                "displayValue": "contains"
-              },
-              {
-                "value": "truthy",
-                "displayValue": "is truthy"
-              },
-              {
-                "value": "falsy",
-                "displayValue": "is falsy"
-              }
+              {"value": "==", "displayValue": "Equals (==)"},
+              {"value": "!=", "displayValue": "Does not equal (!=)"},
+              {"value": "contains", "displayValue": "Contains"},
+              {"value": "does_not_contain", "displayValue": "Does not contain"},
+              {"value": "starts_with", "displayValue": "Starts with"},
+              {"value": "ends_with", "displayValue": "Ends with"},
+              {"value": "truthy", "displayValue": "Is Truthy"},
+              {"value": "falsy", "displayValue": "Is Falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value (not needed for truthy/falsy)",
+            "displayName": "Value",
             "name": "value",
             "type": "TEXT"
           }
@@ -172,35 +148,23 @@
           },
           {
             "defaultValue": "==",
-            "displayName": "Check Type",
+            "displayName": "Operator",
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {
-                "value": "==",
-                "displayValue": "equals (==)"
-              },
-              {
-                "value": "!=",
-                "displayValue": "not equals (!=)"
-              },
-              {
-                "value": "contains",
-                "displayValue": "contains"
-              },
-              {
-                "value": "truthy",
-                "displayValue": "is truthy"
-              },
-              {
-                "value": "falsy",
-                "displayValue": "is falsy"
-              }
+              {"value": "==", "displayValue": "Equals (==)"},
+              {"value": "!=", "displayValue": "Does not equal (!=)"},
+              {"value": "contains", "displayValue": "Contains"},
+              {"value": "does_not_contain", "displayValue": "Does not contain"},
+              {"value": "starts_with", "displayValue": "Starts with"},
+              {"value": "ends_with", "displayValue": "Ends with"},
+              {"value": "truthy", "displayValue": "Is Truthy"},
+              {"value": "falsy", "displayValue": "Is Falsy"}
             ]
           },
           {
             "defaultValue": "",
-            "displayName": "Value (not needed for truthy/falsy)",
+            "displayName": "Value",
             "name": "value",
             "type": "TEXT"
           }
