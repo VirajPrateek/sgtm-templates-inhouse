@@ -262,7 +262,7 @@ switch(eventType) {
 
   case 'gameMultiplier':
     jsonData = [];
-    productsArray = data.productArray;
+    productsArray = data.transactionProducts;
     if (productsArray && productsArray.length > 0) {
       for (let i = 0; i < productsArray.length; i++) {
         jsonData.push({
