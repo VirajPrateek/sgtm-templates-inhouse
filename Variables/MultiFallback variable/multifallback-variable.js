@@ -73,4 +73,4 @@ for (var i = 0; i < rows.length; i++) {
   }
 }
 
-return undefined;
+return null;
