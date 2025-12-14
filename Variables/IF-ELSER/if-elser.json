@@ -1,5 +1,11 @@
 [
   {
+    "type": "CHECKBOX",
+    "name": "enableLog",
+    "checkboxText": "Enable Debug Logging",
+    "simpleValue": true
+  },
+  {
     "type": "GROUP",
     "name": "conditionGroup1",
     "displayName": "IF",
@@ -22,14 +28,54 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "Equals (==)"},
-              {"value": "!=", "displayValue": "Does not equal (!=)"},
-              {"value": "contains", "displayValue": "Contains"},
-              {"value": "does_not_contain", "displayValue": "Does not contain"},
-              {"value": "starts_with", "displayValue": "Starts with"},
-              {"value": "ends_with", "displayValue": "Ends with"},
-              {"value": "truthy", "displayValue": "Is Truthy"},
-              {"value": "falsy", "displayValue": "Is Falsy"}
+              {
+                "value": "==",
+                "displayValue": "Equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "Does not equal (!=)"
+              },
+              {
+                "value": "gt",
+                "displayValue": "Greater than (>)"
+              },
+              {
+                "value": "gte",
+                "displayValue": "Greater than or equal (>=)"
+              },
+              {
+                "value": "lt",
+                "displayValue": "Less than (<)"
+              },
+              {
+                "value": "lte",
+                "displayValue": "Less than or equal (<=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "Contains"
+              },
+              {
+                "value": "does_not_contain",
+                "displayValue": "Does not contain"
+              },
+              {
+                "value": "starts_with",
+                "displayValue": "Starts with"
+              },
+              {
+                "value": "ends_with",
+                "displayValue": "Ends with"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "Is Truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "Is Falsy"
+              }
             ]
           },
           {
@@ -87,14 +133,54 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "Equals (==)"},
-              {"value": "!=", "displayValue": "Does not equal (!=)"},
-              {"value": "contains", "displayValue": "Contains"},
-              {"value": "does_not_contain", "displayValue": "Does not contain"},
-              {"value": "starts_with", "displayValue": "Starts with"},
-              {"value": "ends_with", "displayValue": "Ends with"},
-              {"value": "truthy", "displayValue": "Is Truthy"},
-              {"value": "falsy", "displayValue": "Is Falsy"}
+              {
+                "value": "==",
+                "displayValue": "Equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "Does not equal (!=)"
+              },
+              {
+                "value": "gt",
+                "displayValue": "Greater than (>)"
+              },
+              {
+                "value": "gte",
+                "displayValue": "Greater than or equal (>=)"
+              },
+              {
+                "value": "lt",
+                "displayValue": "Less than (<)"
+              },
+              {
+                "value": "lte",
+                "displayValue": "Less than or equal (<=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "Contains"
+              },
+              {
+                "value": "does_not_contain",
+                "displayValue": "Does not contain"
+              },
+              {
+                "value": "starts_with",
+                "displayValue": "Starts with"
+              },
+              {
+                "value": "ends_with",
+                "displayValue": "Ends with"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "Is Truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "Is Falsy"
+              }
             ]
           },
           {
@@ -152,14 +238,54 @@
             "name": "checkType",
             "type": "SELECT",
             "selectItems": [
-              {"value": "==", "displayValue": "Equals (==)"},
-              {"value": "!=", "displayValue": "Does not equal (!=)"},
-              {"value": "contains", "displayValue": "Contains"},
-              {"value": "does_not_contain", "displayValue": "Does not contain"},
-              {"value": "starts_with", "displayValue": "Starts with"},
-              {"value": "ends_with", "displayValue": "Ends with"},
-              {"value": "truthy", "displayValue": "Is Truthy"},
-              {"value": "falsy", "displayValue": "Is Falsy"}
+              {
+                "value": "==",
+                "displayValue": "Equals (==)"
+              },
+              {
+                "value": "!=",
+                "displayValue": "Does not equal (!=)"
+              },
+              {
+                "value": "gt",
+                "displayValue": "Greater than (>)"
+              },
+              {
+                "value": "gte",
+                "displayValue": "Greater than or equal (>=)"
+              },
+              {
+                "value": "lt",
+                "displayValue": "Less than (<)"
+              },
+              {
+                "value": "lte",
+                "displayValue": "Less than or equal (<=)"
+              },
+              {
+                "value": "contains",
+                "displayValue": "Contains"
+              },
+              {
+                "value": "does_not_contain",
+                "displayValue": "Does not contain"
+              },
+              {
+                "value": "starts_with",
+                "displayValue": "Starts with"
+              },
+              {
+                "value": "ends_with",
+                "displayValue": "Ends with"
+              },
+              {
+                "value": "truthy",
+                "displayValue": "Is Truthy"
+              },
+              {
+                "value": "falsy",
+                "displayValue": "Is Falsy"
+              }
             ]
           },
           {
