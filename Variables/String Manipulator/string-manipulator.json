@@ -1,0 +1,116 @@
+[
+    {
+        "type": "SELECT",
+        "name": "operation",
+        "displayName": "Operation to perform",
+        "macrosInSelect": false,
+        "selectItems": [
+            {
+                "value": "split",
+                "displayValue": "Split"
+            },
+            {
+                "value": "concat",
+                "displayValue": "Concatenate"
+            },
+            {
+                "value": "todo",
+                "displayValue": "TODO: Other (not defined yet)"
+            }
+        ],
+        "simpleValueType": true
+    },
+    {
+        "type": "TEXT",
+        "name": "inputString",
+        "displayName": "Input (Base) String",
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "split",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "concatSeparator",
+        "displayName": "Concatenation Separator",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "concat",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "PARAM_TABLE",
+        "name": "concatItems",
+        "displayName": "Concatenation Items",
+        "paramTableColumns": [
+            {
+                "param": {
+                    "type": "TEXT",
+                    "name": "value",
+                    "displayName": "Value",
+                    "simpleValueType": true
+                },
+                "isUnique": false
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "concat",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "delimiter",
+        "displayName": "Delimiter (for split)",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "split",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "startIndex",
+        "displayName": "Start Index",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "split",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "endIndex",
+        "displayName": "End Index (Optional)",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "split",
+                "type": "EQUALS"
+            }
+        ]
+    }
+]
