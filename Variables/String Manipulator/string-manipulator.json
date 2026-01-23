@@ -14,6 +14,10 @@
                 "displayValue": "Concatenate"
             },
             {
+                "value": "replace",
+                "displayValue": "Replace"
+            },
+            {
                 "value": "todo",
                 "displayValue": "TODO: Other (not defined yet)"
             }
@@ -34,6 +38,11 @@
             {
                 "paramName": "operation",
                 "paramValue": "split",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "operation",
+                "paramValue": "replace",
                 "type": "EQUALS"
             }
         ]
@@ -109,6 +118,45 @@
             {
                 "paramName": "operation",
                 "paramValue": "split",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "replaceRaw",
+        "displayName": "Find (substring)",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "replace",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "replaceWith",
+        "displayName": "Replace with",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "replace",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "CHECKBOX",
+        "name": "replaceAll",
+        "displayName": "Replace All Occurrences",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "operation",
+                "paramValue": "replace",
                 "type": "EQUALS"
             }
         ]

@@ -70,6 +70,33 @@ function run() {
         return "";
     }
 
+    // -----------------------------
+    // REPLACE OPERATION
+    // -----------------------------
+    if (op === "replace") {
+        const input = data.inputString || "";
+        // Basic type check
+        if (!input || typeof input !== "string") {
+            return "";
+        }
+
+        const oldVal = data.replaceRaw || "";
+        const newVal = data.replaceWith || "";
+        const replaceAll = data.replaceAll;
+
+        // If nothing to find, return original
+        if (oldVal === "") {
+            return input;
+        }
+
+        if (replaceAll) {
+            // Split and join is a robust way to replace all without regex regex complications in sandbox
+            return input.split(oldVal).join(newVal);
+        }
+
+        return input.replace(oldVal, newVal);
+    }
+
     // FALLBACK
     return "";
 }
