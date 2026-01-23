@@ -2,7 +2,7 @@
   {
     "type": "SELECT",
     "name": "eventType",
-    "displayName": "Event Type",
+    "displayName": "Event Type (Raw dataLayer event name)",
     "macrosInSelect": false,
     "selectItems": [
       {
