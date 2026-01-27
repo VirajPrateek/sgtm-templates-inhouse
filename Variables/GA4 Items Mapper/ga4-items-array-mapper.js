@@ -99,19 +99,57 @@ switch (eventType) {
 
   case 'select_item':
     jsonData = {};
-    jsonData.item_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
-    jsonData.item_category = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[0] : undefined;
-    jsonData.item_variant = sportIDs[data.transactionProducts['sportID']];
-    jsonData.index = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[1] : undefined;
-    jsonData.price = 'not applicable';
-    jsonData.item_list_id = 'sports_module';
-    jsonData.item_list_name = 'Sports Module';
-    jsonData.prod_module_name = data.transactionProducts['component.moduleName'] ? data.transactionProducts['component.moduleName'].toLowerCase() : undefined;
-    jsonData.prod_module_position = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].toLowerCase() : undefined;
-    jsonData.item_category3 = data.transactionProducts['component.pageLayout'] ? data.transactionProducts['component.pageLayout'].toLowerCase() : undefined;
-    jsonData.prod_module_cust_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
-    jsonData.prod_module_source = data.transactionProducts['component.moduleSource'] ? data.transactionProducts['component.moduleSource'].toLowerCase() : undefined;
-    jsonData.quantity = 1;
+    const moduleCustName_select = data.transactionProducts['component.moduleCustName'];
+
+    if (moduleCustName_select && moduleCustName_select !== 'na') {
+      jsonData.item_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.item_brand = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.item_category = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[0] : undefined;
+      jsonData.item_variant = sportIDs[data.transactionProducts['sportID']];
+      jsonData.index = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[1] : undefined;
+      jsonData.price = 'not applicable';
+      jsonData.item_list_id = 'sports_module';
+      jsonData.item_list_name = 'Sports Module';
+      jsonData.prod_module_name = data.transactionProducts['component.moduleName'] ? data.transactionProducts['component.moduleName'].toLowerCase() : undefined;
+      jsonData.prod_module_position = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].toLowerCase() : undefined;
+      jsonData.prod_market_id = data.transactionProducts.marketID;
+      jsonData.prod_result_id = data.transactionProducts.resultID;
+      jsonData.prod_content_position = data.transactionProducts['component.ContentPosition'];
+      jsonData.item_category3 = data.transactionProducts['component.pageLayout'] ? data.transactionProducts['component.pageLayout'].toLowerCase() : undefined;
+      jsonData.prod_module_cust_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.prod_module_source = data.transactionProducts['component.moduleSource'] ? data.transactionProducts['component.moduleSource'].toLowerCase() : undefined;
+      jsonData.prod_module_user_segment = data.transactionProducts['component.userSegment'] ? data.transactionProducts['component.userSegment'].toLowerCase() : undefined;
+      jsonData.quantity = 1;
+    }
+    else {
+      jsonData.item_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.item_brand = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.item_id = data.transactionProducts.sku;
+      jsonData.item_category = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[0] : undefined;
+      jsonData.price = 'not applicable';
+      jsonData.index = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[1] : undefined;
+      jsonData.item_list_id = 'sports_module';
+      jsonData.item_list_name = 'Sports Module';
+      jsonData.item_variant = sportIDs[data.transactionProducts['sportID']];
+      jsonData.prod_module_name = data.transactionProducts['component.moduleName'];
+      jsonData.prod_module_position = data.transactionProducts['component.modulePosition'];
+      jsonData.prod_market_id = data.transactionProducts.marketID;
+      jsonData.prod_result_id = data.transactionProducts.resultID;
+      jsonData.prod_content_position = data.transactionProducts['component.ContentPosition'];
+      jsonData.item_category3 = data.transactionProducts['component.pageLayout'];
+      jsonData.prod_module_cust_name = data.transactionProducts['component.moduleCustName'];
+      jsonData.prod_module_competition_config = data.transactionProducts['component.moduleCompetitionConfig'];
+      jsonData.prod_module_affiliation_config = data.transactionProducts['component.moduleAffiliationConfig'];
+      jsonData.prod_module_sports_config = data.transactionProducts['component.moduleSportsConfig'];
+      jsonData.prod_module_source = data.transactionProducts['component.moduleSource'];
+      jsonData.item_category_4 = data.transactionProducts['gameDetails'];
+      jsonData.prod_league_id = data.transactionProducts['leagueID'];
+      jsonData.prod_module_user_segment = data.transactionProducts['component.userSegment'];
+      jsonData.prod_recommendation_type = data.transactionProducts['component.recommendationtype'];
+      jsonData.prod_marquee_content_logic = data.transactionProducts['marquee.contentLogic'];
+      jsonData.quantity = 1;
+    }
+
     finalItems.push(jsonData);
     break;
 
