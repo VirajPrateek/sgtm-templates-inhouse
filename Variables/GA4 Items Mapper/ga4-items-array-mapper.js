@@ -51,6 +51,7 @@ var sportIDs = {
 // Get template parameters
 const eventType = data.eventType;
 const realEventName = data.eventName;
+const componentModuleCustName = data.componentModuleCustName || 'na';
 
 // Final GA4 Items array to be returned
 let finalItems = [];
@@ -99,11 +100,9 @@ switch (eventType) {
 
   case 'select_item':
     jsonData = {};
-    const moduleCustName_select = data.transactionProducts['component.moduleCustName'];
-
-    if (moduleCustName_select && moduleCustName_select !== 'na') {
-      jsonData.item_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
-      jsonData.item_brand = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+    if (componentModuleCustName && componentModuleCustName !== 'na') {
+      jsonData.item_name = componentModuleCustName.toLowerCase();
+      jsonData.item_brand = componentModuleCustName.toLowerCase();
       jsonData.item_category = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[0] : undefined;
       jsonData.item_variant = sportIDs[data.transactionProducts['sportID']];
       jsonData.index = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].split("|")[1] : undefined;
@@ -116,7 +115,7 @@ switch (eventType) {
       jsonData.prod_result_id = data.transactionProducts.resultID;
       jsonData.prod_content_position = data.transactionProducts['component.ContentPosition'];
       jsonData.item_category3 = data.transactionProducts['component.pageLayout'] ? data.transactionProducts['component.pageLayout'].toLowerCase() : undefined;
-      jsonData.prod_module_cust_name = data.transactionProducts['component.moduleCustName'] ? data.transactionProducts['component.moduleCustName'].toLowerCase() : undefined;
+      jsonData.prod_module_cust_name = componentModuleCustName.toLowerCase();
       jsonData.prod_module_source = data.transactionProducts['component.moduleSource'] ? data.transactionProducts['component.moduleSource'].toLowerCase() : undefined;
       jsonData.prod_module_user_segment = data.transactionProducts['component.userSegment'] ? data.transactionProducts['component.userSegment'].toLowerCase() : undefined;
       jsonData.quantity = 1;
@@ -149,15 +148,12 @@ switch (eventType) {
       jsonData.prod_marquee_content_logic = data.transactionProducts['marquee.contentLogic'];
       jsonData.quantity = 1;
     }
-
     finalItems.push(jsonData);
     break;
 
   case 'select_item-Mar':
     jsonData = {};
-    const moduleCustName = data.transactionProducts['component.moduleCustName'];
-
-    if (moduleCustName && moduleCustName !== 'na') {
+    if (componentModuleCustName && componentModuleCustName !== 'na') {
       jsonData.item_name = data.transactionProducts['marqueeName'] ? data.transactionProducts['marqueeName'].toLowerCase() : undefined;
       jsonData.item_category = sportIDs[data.transactionProducts['sportID']];
       jsonData.item_variant = data.transactionProducts['page.sitecoretemplateid'];
@@ -170,7 +166,7 @@ switch (eventType) {
       jsonData.prod_module_name = data.transactionProducts['component.moduleName'] ? data.transactionProducts['component.moduleName'].toLowerCase() : undefined;
       jsonData.prod_module_position = data.transactionProducts['component.modulePosition'] ? data.transactionProducts['component.modulePosition'].toLowerCase() : undefined;
       jsonData.item_category3 = data.transactionProducts['component.pageLayout'] ? data.transactionProducts['component.pageLayout'].toLowerCase() : undefined;
-      jsonData.prod_module_cust_name = moduleCustName.toLowerCase();
+      jsonData.prod_module_cust_name = componentModuleCustName.toLowerCase();
       jsonData.prod_module_source = data.transactionProducts['component.moduleSource'] ? data.transactionProducts['component.moduleSource'].toLowerCase() : undefined;
       jsonData.prod_module_recommendation_type = data.transactionProducts['component.recommendationtype'] ? data.transactionProducts['component.recommendationtype'].toLowerCase() : undefined;
     }
@@ -181,17 +177,14 @@ switch (eventType) {
       jsonData.item_brand = data.transactionProducts['marqueeType'] ? data.transactionProducts['marqueeType'].toLowerCase() : undefined;
       jsonData.item_list_id = 'marquees';
       jsonData.item_list_name = 'Marquees';
-      // Mismatch here: ecommerce template uses contentLogic for variant when firing trigger is 'TR - Marquee - Add to Bet' (Event name = Cart.betAdded)
-      //Ecommerce template uses: jsonData.item_variant = data.transactionProducts['page.sitecoretemplateid'] ? data.transactionProducts['page.sitecoretemplateid'].toLowerCase() : undefined;
+
       if (realEventName === 'Cart.betAdded') {
         jsonData.item_variant = data.transactionProducts['page.sitecoretemplateid'] ? data.transactionProducts['page.sitecoretemplateid'].toLowerCase() : undefined;
       } else {
         jsonData.item_variant = data.transactionProducts['marquee.contentLogic'] ? data.transactionProducts['marquee.contentLogic'].toLowerCase() : undefined;
       }
-
       jsonData.quantity = 1;
     }
-
     finalItems.push(jsonData);
     break;
 
