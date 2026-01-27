@@ -51,6 +51,13 @@
     "simpleValueType": true
   },
   {
+    "type": "TEXT",
+    "name": "eventName",
+    "displayName": "Actual Event Name",
+    "helpHint": "Map this to {{Event Name}} to allow the code to branch item_variant logic.",
+    "simpleValueType": true
+  },
+  {
     "type": "GROUP",
     "name": "params",
     "displayName": "Parameters to be mapped",
