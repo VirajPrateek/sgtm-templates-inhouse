@@ -18,6 +18,10 @@
         "displayValue": "select_item-Mar"
       },
       {
+        "value": "select_item-NR",
+        "displayValue": "select_item-NR"
+      },
+      {
         "value": "showmodule",
         "displayValue": "showmodule"
       },
@@ -86,6 +90,11 @@
           },
           {
             "paramName": "eventType",
+            "paramValue": "select_item-NR",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
             "paramValue": "Cart.purchase",
             "type": "EQUALS"
           },
@@ -149,6 +158,11 @@
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
             "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
+            "type": "EQUALS"
           }
         ]
       },
@@ -166,6 +180,11 @@
           {
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
             "type": "EQUALS"
           }
         ]
@@ -185,6 +204,11 @@
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
             "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
+            "type": "EQUALS"
           }
         ]
       },
@@ -203,6 +227,11 @@
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
             "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
+            "type": "EQUALS"
           }
         ]
       },
@@ -220,6 +249,11 @@
           {
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
             "type": "EQUALS"
           }
         ]
@@ -252,6 +286,11 @@
             "paramName": "eventType",
             "paramValue": "select_item-Mar",
             "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
+            "type": "EQUALS"
           }
         ]
       },
@@ -264,6 +303,11 @@
           {
             "paramName": "eventType",
             "paramValue": "select_item",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "select_item-NR",
             "type": "EQUALS"
           }
         ]
