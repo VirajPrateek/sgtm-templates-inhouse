@@ -18,7 +18,11 @@
         "selectItems": [
           {
             "value": "default",
-            "displayValue": "Default (null/undefined/empty/\"not applicable\"/\"na\")"
+            "displayValue": "Default (null/empty/\"not applicable\"/\"na\")"
+          },
+          {
+            "value": "basic",
+            "displayValue": "Basic (null/empty/\"na\")"
           },
           {
             "value": "nullundefined",
