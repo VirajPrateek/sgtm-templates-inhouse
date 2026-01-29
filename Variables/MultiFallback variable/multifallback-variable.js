@@ -71,4 +71,4 @@ for (var i = 0; i < rows.length; i++) {
   }
 }
 
-return null;
+return undefined;
