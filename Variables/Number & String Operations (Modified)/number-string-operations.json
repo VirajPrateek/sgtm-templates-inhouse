@@ -1,0 +1,448 @@
+[
+    {
+        "type": "SELECT",
+        "name": "functionType",
+        "displayName": "Operation Type",
+        "macrosInSelect": false,
+        "selectItems": [
+            {
+                "value": "calc",
+                "displayValue": "Calculate"
+            },
+            {
+                "value": "math",
+                "displayValue": "Math Methods"
+            },
+            {
+                "value": "strings",
+                "displayValue": "String Functions"
+            },
+            {
+                "value": "array",
+                "displayValue": "Array Functions"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "help": "Pick a class of operations to perform"
+    },
+    {
+        "type": "SELECT",
+        "name": "calcFunctionName",
+        "displayName": "Operation",
+        "selectItems": [
+            {
+                "value": "add",
+                "displayValue": "add (+)"
+            },
+            {
+                "value": "subtract",
+                "displayValue": "subtract (-)"
+            },
+            {
+                "value": "multiply",
+                "displayValue": "multiply (*)"
+            },
+            {
+                "value": "divide",
+                "displayValue": "divide (/)"
+            },
+            {
+                "value": "b_and",
+                "displayValue": "AND (boolean)"
+            },
+            {
+                "value": "b_or",
+                "displayValue": "OR (boolean)"
+            },
+            {
+                "value": "b_not",
+                "displayValue": "NOT (boolean)"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "functionType",
+                "paramValue": "calc",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "SELECT",
+        "name": "mathMethodName",
+        "displayName": "Method",
+        "selectItems": [
+            {
+                "value": "abs",
+                "displayValue": "abs"
+            },
+            {
+                "value": "ceil",
+                "displayValue": "ceil"
+            },
+            {
+                "value": "floor",
+                "displayValue": "floor"
+            },
+            {
+                "value": "max",
+                "displayValue": "max"
+            },
+            {
+                "value": "min",
+                "displayValue": "min"
+            },
+            {
+                "value": "round",
+                "displayValue": "round"
+            },
+            {
+                "value": "trunc",
+                "displayValue": "trunc"
+            },
+            {
+                "value": "pow",
+                "displayValue": "pow"
+            },
+            {
+                "value": "sqrt",
+                "displayValue": "sqrt"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "functionType",
+                "paramValue": "math",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "SELECT",
+        "name": "stringMethodName",
+        "displayName": "Function",
+        "selectItems": [
+            {
+                "value": "indexOf",
+                "displayValue": "indexOf"
+            },
+            {
+                "value": "lastIndexOf",
+                "displayValue": "lastIndexOf"
+            },
+            {
+                "value": "split",
+                "displayValue": "split"
+            },
+            {
+                "value": "toLowerCase",
+                "displayValue": "toLowerCase"
+            },
+            {
+                "value": "toUpperCase",
+                "displayValue": "toUpperCase"
+            },
+            {
+                "value": "replace",
+                "displayValue": "replace"
+            },
+            {
+                "value": "slice",
+                "displayValue": "slice"
+            },
+            {
+                "value": "substr",
+                "displayValue": "substr"
+            },
+            {
+                "value": "substring",
+                "displayValue": "substring"
+            },
+            {
+                "value": "match",
+                "displayValue": "match"
+            },
+            {
+                "value": "sha256",
+                "displayValue": "sha256"
+            },
+            {
+                "value": "base64",
+                "displayValue": "base64"
+            },
+            {
+                "value": "toFixed",
+                "displayValue": "toFixed (Param2 = Decimals)"
+            },
+            {
+                "value": "toNumber",
+                "displayValue": "toNumber"
+            },
+            {
+                "value": "replaceAll",
+                "displayValue": "replaceAll"
+            },
+            {
+                "value": "splitSpecial",
+                "displayValue": "split+extract (split, then get item at param 3 index)"
+            },
+            {
+                "value": "jstringify",
+                "displayValue": "JSON.stringify"
+            },
+            {
+                "value": "jparse",
+                "displayValue": "JSON.parse"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "functionType",
+                "paramValue": "strings",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "SELECT",
+        "name": "arrayMethodName",
+        "displayName": "Method",
+        "selectItems": [
+            {
+                "value": "length",
+                "displayValue": "Get Array Length"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "functionType",
+                "paramValue": "array",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "op1",
+        "displayName": "Parameter 1",
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "op2",
+        "displayName": "Parameter 2",
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "REGEX",
+                "args": [
+                    "^.+$"
+                ]
+            }
+        ],
+        "enablingConditions": [
+            {
+                "paramName": "calcFunctionName",
+                "paramValue": "b_not",
+                "type": "NOT_EQUALS"
+            },
+            {
+                "paramName": "mathMethodName",
+                "paramValue": "min",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "mathMethodName",
+                "paramValue": "max",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "indexOf",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "lastIndexOf",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "match",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "replace",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "slice",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "substr",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "substring",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "toFixed",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "mathMethodName",
+                "paramValue": "pow",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "replaceAll",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "split",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "splitSpecial",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "splitSpecial",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "TEXT",
+        "name": "op3",
+        "displayName": "Parameter 3",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "replace",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "replaceAll",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "slice",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "substr",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "substring",
+                "type": "EQUALS"
+            },
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "splitSpecial",
+                "type": "EQUALS"
+            }
+        ]
+    },
+    {
+        "type": "CHECKBOX",
+        "name": "undefinedPassThrough",
+        "checkboxText": "Ignore undefined / null",
+        "simpleValueType": true,
+        "enablingConditions": [
+            {
+                "paramName": "stringMethodName",
+                "paramValue": "sha256",
+                "type": "EQUALS"
+            }
+        ],
+        "help": "Activate to return unchanged input in case of \"undefined\" or \"null\" as value"
+    },
+    {
+        "type": "SELECT",
+        "name": "resultTransformation",
+        "displayName": "Result Transformation",
+        "macrosInSelect": false,
+        "selectItems": [
+            {
+                "value": "none",
+                "displayValue": "None (unchanged)"
+            },
+            {
+                "value": "round",
+                "displayValue": "Convert To Integer (Rounded)"
+            },
+            {
+                "value": "fixed",
+                "displayValue": "Convert to Fixed (2 Decimals)"
+            },
+            {
+                "value": "floor",
+                "displayValue": "Convert To Integer (Truncated)"
+            },
+            {
+                "value": "string",
+                "displayValue": "Convert To String"
+            }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [
+            {
+                "type": "NON_EMPTY"
+            }
+        ],
+        "defaultValue": "none",
+        "help": "Choose a transformation method to ensure desired output format"
+    }
+]
