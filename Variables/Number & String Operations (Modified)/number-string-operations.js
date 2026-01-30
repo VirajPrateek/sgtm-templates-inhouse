@@ -13,11 +13,9 @@ var op2 = makeNumber(data.op2);
 var op3 = makeNumber(data.op3);
 
 const replaceAll = function (str, oldstr, newstr) {
-    var rs = str;
-    if (oldstr === newstr) return rs;
-    while (rs.indexOf(oldstr) >= 0)
-        rs = rs.replace(oldstr, newstr);
-    return rs;
+    if (!str) return "";
+    if (oldstr === newstr) return str;
+    return str.split(oldstr).join(newstr);
 };
 
 switch (tp) {
