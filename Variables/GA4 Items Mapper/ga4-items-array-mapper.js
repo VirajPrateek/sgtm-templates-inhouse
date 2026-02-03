@@ -1,4 +1,10 @@
-﻿const log = require('logToConsole');
+﻿const _logModule = require('logToConsole');
+const LOG_ENABLED = false;
+const log = (msg, type) => {
+  if (LOG_ENABLED) {
+    _logModule(msg, type);
+  }
+};
 const JSON = require('JSON');
 
 // Lookup table for sport IDs

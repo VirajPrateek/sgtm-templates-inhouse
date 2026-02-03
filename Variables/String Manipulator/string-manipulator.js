@@ -1,5 +1,9 @@
 const makeInteger = require('makeInteger');
-const logToConsole = require('logToConsole');
+const _logModule = require('logToConsole');
+const LOG_ENABLED = false;
+const logToConsole = function (msg, arg2) {
+    if (LOG_ENABLED) _logModule(msg, arg2);
+};
 
 function run() {
     const op = data.operation;

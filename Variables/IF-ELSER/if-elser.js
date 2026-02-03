@@ -1,4 +1,8 @@
-const logToConsole = require('logToConsole');
+const _logModule = require('logToConsole');
+const LOG_ENABLED = false;
+const logToConsole = function (msg) {
+  if (LOG_ENABLED) _logModule(msg);
+};
 const makeString = require('makeString');
 const makeNumber = require('makeNumber');
 
