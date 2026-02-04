@@ -126,6 +126,7 @@
         "type": "TEXT",
         "name": "replaceRaw",
         "displayName": "Find (substring)",
+        "help": "Use \\s to represent a space character",
         "simpleValueType": true,
         "enablingConditions": [
             {
@@ -139,6 +140,7 @@
         "type": "TEXT",
         "name": "replaceWith",
         "displayName": "Replace with",
+        "help": "Use \\s to represent a space character",
         "simpleValueType": true,
         "enablingConditions": [
             {

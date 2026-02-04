@@ -84,8 +84,16 @@ function run() {
             return "";
         }
 
-        const oldVal = data.replaceRaw || "";
-        const newVal = data.replaceWith || "";
+        let oldVal = data.replaceRaw || "";
+        let newVal = data.replaceWith || "";
+
+        // Support \s as space character
+        if (oldVal.indexOf('\\s') > -1) {
+            oldVal = oldVal.split('\\s').join(' ');
+        }
+        if (newVal.indexOf('\\s') > -1) {
+            newVal = newVal.split('\\s').join(' ');
+        }
         const replaceAll = data.replaceAll;
 
         // If nothing to find, return original
