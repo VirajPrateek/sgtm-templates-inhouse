@@ -217,6 +217,15 @@ switch (eventType) {
       } else {
         jsonData.item_variant = (safeTransactionProducts['marquee.contentLogic'] || 'na').toLowerCase();
       }
+
+      jsonData.prod_marquee_name = (safeTransactionProducts['marqueeName'] || 'na').toLowerCase();
+      jsonData.prod_marquee_type = (safeTransactionProducts['marqueeType'] || 'na').toLowerCase();
+      jsonData.prod_module_name = (safeTransactionProducts['component.moduleName'] || 'na').toLowerCase();
+      jsonData.prod_module_position = (safeTransactionProducts['component.modulePosition'] || 'na').toLowerCase();
+      jsonData.item_category3 = (safeTransactionProducts['component.pageLayout'] || 'na').toLowerCase();
+      jsonData.prod_module_cust_name = (safeTransactionProducts['component.moduleCustName'] || 'na').toLowerCase();
+      jsonData.prod_module_source = (safeTransactionProducts['component.moduleSource'] || 'na').toLowerCase();
+      jsonData.prod_recommendation_type = (safeTransactionProducts['component.recommendationtype'] || 'na').toLowerCase();
       jsonData.quantity = 1;
     }
     finalItems.push(jsonData);
