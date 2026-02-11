@@ -44,6 +44,10 @@
       {
         "value": "Cart.checkout",
         "displayValue": "Cart.checkout"
+      },
+      {
+        "value": "purchaseComplete",
+        "displayValue": "purchaseComplete"
       }
     ],
     "simpleValueType": true
@@ -121,6 +125,11 @@
           {
             "paramName": "eventType",
             "paramValue": "Cart.checkout",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "purchaseComplete",
             "type": "EQUALS"
           }
         ]

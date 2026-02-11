@@ -468,6 +468,29 @@ switch (eventType) {
     finalItems = jsonData;
     break;
 
+  case 'purchaseComplete':
+    jsonData = [];
+    productsArray = data.transactionProducts;
+    if (productsArray && productsArray.length > 0) {
+      for (let i = 0; i < productsArray.length; i++) {
+        if (productsArray[i] !== undefined) {
+          jsonData.push({
+            'item_name': productsArray[i].name,
+            'item_brand': productsArray[i].brand,
+            'item_category': productsArray[i].category,
+            'item_variant': productsArray[i].variant,
+            'item_list_id': 'bingo',
+            'item_list_name': 'bingo',
+            'item_coupon': productsArray[i].coupon,
+            'price': productsArray[i].price,
+            'quantity': productsArray[i].quantity
+          });
+        }
+      }
+    }
+    finalItems = jsonData;
+    break;
+
   default:
     log('Event type "' + eventType + '" not configured.', 'warn');
 }
