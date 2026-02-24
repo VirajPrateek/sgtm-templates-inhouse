@@ -2,7 +2,13 @@
   {
     "type": "TEXT",
     "name": "returnType",
-    "displayName": "returnType",
-    "simpleValueType": true
+    "displayName": "Return Type",
+    "simpleValueType": true,
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "help": "Type of data to return: category_event, label_event, action_event, position_event, location_event, or event_details"
   }
 ]
