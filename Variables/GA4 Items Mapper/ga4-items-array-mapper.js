@@ -180,8 +180,8 @@ switch (eventType) {
       jsonData.prod_module_user_segment = (safeTransactionProducts['component.userSegment'] || 'na').toLowerCase();
       jsonData.prod_recommendation_type = safeTransactionProducts['component.recommendationtype'];
       jsonData.prod_marquee_content_logic = safeTransactionProducts['marquee.contentLogic'];
-      jsonData.quantity = 1;
     }
+    jsonData.quantity = 1;
     finalItems.push(jsonData);
     break;
 
