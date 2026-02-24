@@ -1,0 +1,8 @@
+[
+  {
+    "type": "TEXT",
+    "name": "returnType",
+    "displayName": "returnType",
+    "simpleValueType": true
+  }
+]
