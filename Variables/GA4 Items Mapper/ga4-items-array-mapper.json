@@ -48,6 +48,10 @@
       {
         "value": "purchaseComplete",
         "displayValue": "purchaseComplete"
+      },
+      {
+        "value": "productDetail",
+        "displayValue": "productDetail"
       }
     ],
     "simpleValueType": true
@@ -130,6 +134,11 @@
           {
             "paramName": "eventType",
             "paramValue": "purchaseComplete",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "eventType",
+            "paramValue": "productDetail",
             "type": "EQUALS"
           }
         ]
