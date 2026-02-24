@@ -72,12 +72,12 @@ for (var i = 0; i < list.length; i++) {
   }
 }
 
-categoryArr.sort();
+/*categoryArr.sort();
 labelArr.sort();
 actionArr.sort();
 positionArr.sort();
 locationArr.sort();
-eventDetailsArr.sort();
+eventDetailsArr.sort();*/
 
 if (!returnType) {
   return undefined;
