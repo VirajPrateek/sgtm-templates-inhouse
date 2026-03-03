@@ -10,5 +10,13 @@
       }
     ],
     "help": "Type of data to return: category_event, label_event, action_event, position_event, location_event, or event_details"
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "enableSort",
+    "displayName": "Enable Sorting",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "Sort the results alphabetically. Note: This will break index correlation between different return types."
   }
 ]

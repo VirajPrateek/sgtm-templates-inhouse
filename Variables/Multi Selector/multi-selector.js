@@ -60,6 +60,7 @@ if (!list || !list.length) {
   return undefined;
 }
 
+// Build arrays maintaining position and adding 'na' for missing values
 var categoryArr = [];
 var labelArr = [];
 var actionArr = [];
@@ -70,44 +71,41 @@ var eventDetailsArr = [];
 for (var i = 0; i < list.length; i++) {
   var item = list[i];
 
-  var category = item['component.CategoryEvent'];
-  var label = item['component.LabelEvent'];
-  var action = item['component.ActionEvent'];
-  var position = item['component.PositionEvent'];
-  var location = item['component.LocationEvent'];
-  var eventDetails = item['component.EventDetails'];
+  // Extract values or use 'na' as placeholder
+  var category = item['component.CategoryEvent'] || 'na';
+  var label = item['component.LabelEvent'] || 'na';
+  var action = item['component.ActionEvent'] || 'na';
+  var position = item['component.PositionEvent'] || 'na';
+  var location = item['component.LocationEvent'] || 'na';
+  var eventDetails = item['component.EventDetails'] || 'na';
 
-  if (category && categoryArr.indexOf(category) === -1) {
-    categoryArr.push(category);
-  }
-
-  if (label && labelArr.indexOf(label) === -1) {
-    labelArr.push(label);
-  }
-  
-  if (action && actionArr.indexOf(action) === -1) {
-    actionArr.push(action);
-  }
-
-  if (position && positionArr.indexOf(position) === -1) {
-    positionArr.push(position);
-  }
-  
-  if (location && locationArr.indexOf(location) === -1) {
-    locationArr.push(location);
-  }
-
-  if (eventDetails && eventDetailsArr.indexOf(eventDetails) === -1) {
-    eventDetailsArr.push(eventDetails);
-  }
+  // Push all values to maintain array length consistency
+  categoryArr.push(category);
+  labelArr.push(label);
+  actionArr.push(action);
+  positionArr.push(position);
+  locationArr.push(location);
+  eventDetailsArr.push(eventDetails);
 }
 
-/*categoryArr.sort();
-labelArr.sort();
-actionArr.sort();
-positionArr.sort();
-locationArr.sort();
-eventDetailsArr.sort();*/
+log('Category array: ' + JSON.stringify(categoryArr), 'info');
+log('Label array: ' + JSON.stringify(labelArr), 'info');
+log('Action array: ' + JSON.stringify(actionArr), 'info');
+log('Position array: ' + JSON.stringify(positionArr), 'info');
+log('Location array: ' + JSON.stringify(locationArr), 'info');
+log('Event details array: ' + JSON.stringify(eventDetailsArr), 'info');
+
+// Apply sorting if enabled
+var enableSort = data.enableSort || false;
+if (enableSort) {
+  log('Sorting enabled - applying sort', 'info');
+  categoryArr.sort();
+  labelArr.sort();
+  actionArr.sort();
+  positionArr.sort();
+  locationArr.sort();
+  eventDetailsArr.sort();
+}
 
 if (!returnType) {
   return undefined;
