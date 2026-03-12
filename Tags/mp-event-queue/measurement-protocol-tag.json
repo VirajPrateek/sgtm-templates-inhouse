@@ -1,0 +1,187 @@
+[
+  {
+    "type": "CHECKBOX",
+    "name": "redactVisitorIp",
+    "checkboxText": "Redact Visitor IP",
+    "simpleValueType": true
+  },
+  {
+    "type": "TEXT",
+    "name": "measurementId",
+    "displayName": "Measurement ID",
+    "simpleValueType": true,
+    "help": "If the event came from a GA4 web tag, you can leave this field blank to inherit the measurement ID of the event",
+    "valueHint": "G-1234567890"
+  },
+  {
+    "type": "TEXT",
+    "name": "apiSecret",
+    "displayName": "API Secret",
+    "simpleValueType": true
+  },
+  {
+    "type": "TEXT",
+    "name": "eventName",
+    "displayName": "Event Name",
+    "simpleValueType": true,
+    "help": "The event name to send to Google. See the <a href=\"https://developers.google.com/analytics/devguides/collection/ga4/events?client_type=gtag\" target=\"_blank\">recommended events</a> for more information. If this field is blank, the value of the event_name parameter will be sent.",
+    "valueHint": "Defaults to event.event_name"
+  },
+  {
+    "type": "GROUP",
+    "name": "eventParametersGroup",
+    "displayName": "Event Parameters",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SELECT",
+        "name": "epToIncludeDropdown",
+        "displayName": "Default Parameters to Include",
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "value": "all",
+            "displayValue": "All"
+          },
+          {
+            "value": "none",
+            "displayValue": "None"
+          }
+        ],
+        "simpleValueType": true,
+        "help": "Specify which event parameters to send to Google by default. Do not send personally identifiable information (PII) to Google Analytics. See the <a href=\"https://developers.google.com/analytics/devguides/collection/app-web/policy\" target=\"_blank\">documentation</a> for more details. The following parameters are excluded regardless of the selected option: first_name, last_name, email_address, phone_number, address"
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "epToExclude",
+        "displayName": "Parameters to Exclude",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Name",
+            "name": "fieldname",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ]
+          }
+        ],
+        "help": "Event parameters listed here will not be sent to Google.",
+        "newRowButtonText": "+ Add param"
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "eventParameters",
+        "displayName": "Parameters to Add / Edit",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Name",
+            "name": "fieldName",
+            "type": "TEXT",
+            "isUnique": true
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT",
+            "isUnique": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "userPropertiesGroup",
+    "displayName": "User Properties",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "SELECT",
+        "name": "upToIncludeDropdown",
+        "displayName": "Default Properties to Include",
+        "macrosInSelect": false,
+        "selectItems": [
+          {
+            "value": "all",
+            "displayValue": "All"
+          },
+          {
+            "value": "none",
+            "displayValue": "None"
+          }
+        ],
+        "simpleValueType": true,
+        "help": "Specify which user properties to send to Google by default."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "upToExclude",
+        "displayName": "Properties to Exclude",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Name",
+            "name": "fieldName",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ]
+          }
+        ],
+        "help": "User properties listed here will not be sent to Google"
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "userProperties",
+        "displayName": "Properties to Add / Edit",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Name",
+            "name": "fieldName",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Value",
+            "name": "value",
+            "type": "TEXT",
+            "valueValidators": [
+              {
+                "type": "NON_EMPTY"
+              }
+            ]
+          }
+        ],
+        "help": "User properties listed here will be added to the event sent to Google. If the user property is already included, then the value will be replaced with the specified value."
+      },
+      {
+        "type": "TEXT",
+        "name": "userPropertiesVariable",
+        "displayName": "User Properties Variable",
+        "simpleValueType": true
+      }
+    ]
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "debugMode",
+    "checkboxText": "Debug Mode",
+    "simpleValueType": true
+  }
+]
