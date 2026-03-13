@@ -1,0 +1,24 @@
+[
+  {
+    "type": "TEXT",
+    "name": "input",
+    "displayName": "Array / Object",
+    "simpleValueType": true
+  },
+  {
+    "type": "TEXT",
+    "name": "dotkeys",
+    "displayName": "Dot/Nested Keys",
+    "simpleValueType": true,
+    "help": "Dot is treated as string.\nTo access nested objects, use \">\" notation \n(ex: ecommerce>items>0>item_name)."
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "enableFlatKeyFallback",
+    "checkboxText": "Enable flat key fallback",
+    "displayName": "Flat Key Fallback",
+    "simpleValueType": true,
+    "defaultValue": false,
+    "help": "When enabled, if the nested key path returns undefined, the template will also try joining the path with dots and looking up the flat key (e.g. 'component.EventDetails') directly on the object. Useful when datalayer objects use dot-notation keys instead of nested structures."
+  }
+]
