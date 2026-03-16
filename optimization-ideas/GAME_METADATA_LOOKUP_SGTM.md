@@ -2,7 +2,7 @@
 
 **Status:** Proposal / Discussion  
 **Date:** 2026-03-13  
-**Author:** Analytics Engineering Team
+**Author:** Web Tracking Team (Tech)
 
 ---
 
