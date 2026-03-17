@@ -1,5 +1,5 @@
 const logToConsole = require('logToConsole');
-const getAllEventData = require('getAllEventData');
+const getAllEventData = require('getAllEventData');  
 const encodeUriComponent = require('encodeUriComponent');
 const JSON = require('JSON');
 const sendHttpRequest = require('sendHttpRequest');
@@ -11,33 +11,19 @@ const testRegex = require('testRegex');
 
 const ga4ParamRegex = createRegex('^[a-zA-Z][a-zA-Z0-9_]{0,39}$');
 
-const excludedKeys = {
-  client_id: true,
-  ip_override: true,
-  client_hints: true,
-  datalayer: true,
-  event_name: true,
-  screen_resoluation: true,
-  firebase_conversion: true,
-  user_agent: true,
-  language: true
-};
 
 const eventData = getAllEventData();
-const eventName = data.eventName || eventData.event_name;
 
-const endpoint = data.debugMode
-  ? 'https://www.google-analytics.com/debug/mp/collect'
-  : 'https://www.google-analytics.com/mp/collect';
+const eventName = data.eventName ? data.eventName : eventData.event_name;
 
-const postUrl =
-  endpoint +
-  '?measurement_id=' + encodeUriComponent(data.measurementId) +
-  '&api_secret=' + encodeUriComponent(data.apiSecret);
+const debug = data.debugMode ?  logToConsole('Debug Mode') : logToConsole('Normal Mode');
 
-/* --------------------------------------------------------
-   Validation
--------------------------------------------------------- */
+const endpoint = data.debugMode ? 'https://sst-kafka-bridge.int.itsfogo.com' :
+'https://sst-kafka-bridge.int.itsfogo.com';
+
+const postUrl = endpoint;
+//+ '?measurement_id=' + encodeUriComponent(data.measurementId) + '&api_secret=' + encodeUriComponent(data.apiSecret);
+
 
 if (!eventData.client_id && !eventData.user_id) {
   logToConsole('MP request missing client_id and user_id');
@@ -50,10 +36,6 @@ if (!eventName) {
   data.gtmOnFailure();
   return;
 }
-
-/* --------------------------------------------------------
-   Payload Construction
--------------------------------------------------------- */
 
 let payload = {
   events: [getEvent()]
@@ -68,45 +50,33 @@ if (userProperties) payload.user_properties = userProperties;
 if (eventData.ip_override) payload.ip_override = eventData.ip_override;
 if (eventData.user_agent) payload.user_agent = eventData.user_agent;
 if (eventData.consent) payload.consent = eventData.consent;
+  
 
 const requestBody = JSON.stringify(payload);
 
-/* --------------------------------------------------------
-   Send Request
--------------------------------------------------------- */
 
-sendHttpRequest(
-  postUrl,
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-  },
-  requestBody
-).then(
-  (result) => {
-    if (result.statusCode >= 200 && result.statusCode < 300) {
-      data.gtmOnSuccess();
-    } else {
-      logToConsole('MP Endpoint Error: ' + result.statusCode);
-      data.gtmOnFailure();
-    }
-  },
-  () => {
+
+
+sendHttpRequest(postUrl, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  //timeout: 2000
+}, requestBody).then((result) => {
+  if (result.statusCode >= 200 && result.statusCode < 300) {
+    data.gtmOnSuccess();
+  } else {
+    logToConsole('MP Endpoint Error: ' + result.statusCode);
     data.gtmOnFailure();
   }
-);
-
-/* --------------------------------------------------------
-   Helpers
--------------------------------------------------------- */
+}, () => {
+  data.gtmOnFailure();
+});
 
 function getUserProperties() {
-
   let userProperties = {};
 
-  // Properties defined in tag
   if (data.userProperties && data.userProperties.length) {
-    data.userProperties.forEach(function(property) {
+    data.userProperties.forEach((property) => {
 
       if (property.value !== undefined && property.value !== null && property.value !== '') {
         userProperties[property.fieldName] = {
@@ -116,74 +86,101 @@ function getUserProperties() {
 
     });
   }
-
-  // Properties from variable
+  
   if (getType(data.userPropertiesVariable) === 'object') {
+     Object.keys(data.userPropertiesVariable).forEach(function(key) {
 
-    Object.keys(data.userPropertiesVariable).forEach(function(key) {
+    const value = data.userPropertiesVariable[key];
 
-      const value = data.userPropertiesVariable[key];
+    if (value !== undefined && value !== null && value !== '') {
+      userProperties[key] = {
+        value: value
+      };
+    }
 
-      if (value !== undefined && value !== null && value !== '') {
-        userProperties[key] = { value: value };
-      }
-
-    });
-
+  });
+    
+    
   }
 
   return Object.keys(userProperties).length ? userProperties : undefined;
 }
 
+
+
 function isValidGA4ParamName(name) {
 
-  if (!name) return false;
+  if (!name)  return false;
   if (name.length > 40) return false;
+  return  testRegex(ga4ParamRegex, name);
 
-  return testRegex(ga4ParamRegex, name);
 }
 
 function shouldExclude(key, value) {
-
-  if (excludedKeys[key]) return true;
-  if (key.indexOf('x-') === 0) return true;
-  if (value === undefined || value === null) return true;
-  if (!isValidGA4ParamName(key)) return true;
-
+  
+  const excludedKeys = {
+  client_id: true,
+  ip_override: true,
+  client_hints: true,
+  datalayer: true,
+  event_name: true,
+  screen_resoluation: true,
+  firebase_conversion: true,
+  user_agent: true,
+  language: true 
+};
+  
+ if (excludedKeys[key])
+ { 
+   //logToConsole('excludedKeys');
+   return true;
+ }
+ if (key.indexOf('x-') === 0)  { 
+   //logToConsole('x-');
+   return true;
+ }
+ if (value === undefined || value === null)  { 
+   //logToConsole('null check');
+   return true;
+ }
+ if (!isValidGA4ParamName(key))  { 
+   //logToConsole('validParamName');
+   return true;
+ }
+  
   return false;
+  
 }
 
 function getEvent() {
-
-  let event = {
+  
+  let event = {  
     name: eventName,
     params: {}
   };
-
-  /* Copy valid eventData parameters */
-
-  Object.keys(eventData).forEach(function(key) {
-
-    const value = eventData[key];
-
-    if (!shouldExclude(key, value)) {
-      event.params[key] = value;
-    }
-
-  });
-
-  /* Add parameters configured in tag */
-
-  if (data.eventParameters && data.eventParameters.length) {
-
-    data.eventParameters.forEach(function(property) {
-      event.params[property.fieldName] = property.value;
-    });
-
+  // loop through eventData
+  
+  
+Object.keys(eventData).forEach(function(key) {
+  const value = eventData[key];
+  //logToConsole('Checking: ',key, value); 
+ if (!shouldExclude(key, value)) {
+   //logToConsole('Adding: ',key, value); 
+ event.params[key] = value;
   }
+});
+  
+  //  loop through event params added in tag
+  if (data.eventParameters && data.eventParameters.length) {
+    data.eventParameters.forEach((property) => {
+     
+      event.params[property.fieldName] = property.value;
 
-  // Optional session logic
-  // event.params.session_id = makeNumber(eventData.ga_session_id);
-
+    });
+  }
+    
+  //event.params.session_id = makeNumber(eventData.ga_session_id);
+  //logToConsole('Event Params: ' , event.params);
+  //logToConsole('N Event Params: ',Object.keys(event.params).length);
   return event;
 }
