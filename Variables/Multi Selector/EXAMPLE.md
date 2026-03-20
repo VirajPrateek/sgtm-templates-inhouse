@@ -1,103 +1,175 @@
 # Multi Selector - Usage Examples
 
 ## Overview
-This variable extracts and formats data from event arrays while maintaining positional consistency across all fields.
+This variable extracts and formats data from event arrays in the datalayer. It deduplicates values for category, label, action, and position, while preserving all values (with positional alignment) for location and event_details.
 
 ## Key Features
-- Maintains array length consistency (all return types have same number of items)
-- Uses 'na' as placeholder for missing values
-- Optional sorting (WARNING: breaks index correlation between different return types)
+- Deduplicates: `category_event`, `label_event`, `action_event`, `position_event`
+- Preserves all values (no dedup): `location_event`, `event_details` — to maintain index-level correlation
+- Uses `'na'` as placeholder for missing/empty values
 - Supports both stringified and object data layers
 
-## Input Example
+## Supported Events
+- `Event.betFilters` → reads from `betFilters` array
+- `Event.FeebackLoad` → reads from `FeedbackQuestions` array
 
+---
+
+## Example 1: Basic — All values present, repeated dimensions
+
+### DataLayer Push
 ```javascript
-{
-  "betFilters": [
+dataLayer.push({
+  event: 'Event.FeebackLoad',
+  FeedbackQuestions: [
     {
-      "component.CategoryEvent": "sports",
-      "component.LabelEvent": "football",
-      "component.ActionEvent": "click",
-      "component.PositionEvent": "1",
-      "component.LocationEvent": "header",
-      "component.EventDetails": "premier-league"
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 1",
+      "component.EventDetails": "answer 1"
     },
     {
-      "component.CategoryEvent": "sports",
-      "component.LabelEvent": "tennis",
-      // ActionEvent missing
-      "component.PositionEvent": "2",
-      // LocationEvent missing
-      "component.EventDetails": "wimbledon"
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 2",
+      "component.EventDetails": "answer 2"
     },
     {
-      // CategoryEvent missing
-      "component.LabelEvent": "basketball",
-      "component.ActionEvent": "hover",
-      "component.PositionEvent": "3",
-      "component.LocationEvent": "sidebar",
-      // EventDetails missing
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 3",
+      "component.EventDetails": "answer 3"
     }
   ]
-}
+});
 ```
 
-## Output Examples (Sorting Disabled)
-
-All arrays maintain the same length and order, so index positions correlate:
-
+### Output
 ```
-returnType = 'category_event'  → "sports|sports|na"
-returnType = 'label_event'     → "football|tennis|basketball"
-returnType = 'action_event'    → "click|na|hover"
-returnType = 'position_event'  → "1|2|3"
-returnType = 'location_event'  → "header|na|sidebar"
-returnType = 'event_details'   → "premier-league|wimbledon|na"
+category_event  → "bingo room"                      (deduped)
+label_event     → "room interaction"                 (deduped)
+action_event    → "submit"                           (deduped)
+position_event  → "feedback form"                    (deduped)
+location_event  → "question 1|question 2|question 3" (all values)
+event_details   → "answer 1|answer 2|answer 3"      (all values)
 ```
 
-### Index Correlation
-- Index 0: sports, football, click, 1, header, premier-league
-- Index 1: sports, tennis, na, 2, na, wimbledon
-- Index 2: na, basketball, hover, 3, sidebar, na
+---
 
-## Output Examples (Sorting Enabled)
+## Example 2: Missing values — 'na' placeholder
 
-⚠️ WARNING: When sorting is enabled, each array is sorted independently, breaking the index correlation:
-
+### DataLayer Push
+```javascript
+dataLayer.push({
+  event: 'Event.FeebackLoad',
+  FeedbackQuestions: [
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "abc",
+      "component.EventDetails": "cba"
+    },
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "",
+      "component.EventDetails": "fed"
+    },
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "ghi",
+      "component.EventDetails": ""
+    }
+  ]
+});
 ```
-returnType = 'category_event'  → "na|sports|sports"
-returnType = 'label_event'     → "basketball|football|tennis"
-returnType = 'action_event'    → "click|hover|na"
-returnType = 'position_event'  → "1|2|3"
-returnType = 'location_event'  → "header|na|sidebar"
-returnType = 'event_details'   → "na|premier-league|wimbledon"
+
+### Output
+```
+category_event  → "bingo room"
+label_event     → "room interaction"
+action_event    → "submit"
+position_event  → "feedback form"
+location_event  → "abc|na|ghi"
+event_details   → "cba|fed|na"
 ```
 
-## Use Cases
+Index 1: location is `na` (was empty), details is `fed` — alignment preserved.
+Index 2: location is `ghi`, details is `na` (was empty) — alignment preserved.
 
-### Use Case 1: Correlated Data Analysis
-When you need to maintain the relationship between fields (e.g., which event_details corresponds to which location_event):
-- Keep sorting DISABLED
-- Use the same index across different return types
+---
 
-### Use Case 2: Unique Value Lists
-When you only need a sorted list of unique values without caring about relationships:
-- Enable sorting
-- Use for dropdown lists, filters, or aggregated reports
+## Example 3: Duplicate location/details pairs
+
+### DataLayer Push
+```javascript
+dataLayer.push({
+  event: 'Event.FeebackLoad',
+  FeedbackQuestions: [
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "abc",
+      "component.EventDetails": "cba"
+    },
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "def",
+      "component.EventDetails": "fed"
+    },
+    {
+      "component.CategoryEvent": "bingo room",
+      "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit",
+      "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "abc",
+      "component.EventDetails": "cba"
+    }
+  ]
+});
+```
+
+### Output
+```
+category_event  → "bingo room"
+label_event     → "room interaction"
+action_event    → "submit"
+position_event  → "feedback form"
+location_event  → "abc|def|abc"
+event_details   → "cba|fed|cba"
+```
+
+Duplicates in location/event_details are kept to preserve positional alignment.
+
+---
 
 ## Configuration
 
 ### Return Type Options
-- `category_event` - Returns component.CategoryEvent values
-- `label_event` - Returns component.LabelEvent values
-- `action_event` - Returns component.ActionEvent values
-- `position_event` - Returns component.PositionEvent values
-- `location_event` - Returns component.LocationEvent values
-- `event_details` - Returns component.EventDetails values
-
-### Enable Sorting
-- `false` (default) - Maintains original order and index correlation
-- `true` - Sorts alphabetically, breaks index correlation
+- `category_event` — `component.CategoryEvent` values (deduped)
+- `label_event` — `component.LabelEvent` values (deduped)
+- `action_event` — `component.ActionEvent` values (deduped)
+- `position_event` — `component.PositionEvent` values (deduped)
+- `location_event` — `component.LocationEvent` values (all, positional)
+- `event_details` — `component.EventDetails` values (all, positional)
 
 ## Debugging
 
@@ -105,9 +177,3 @@ To enable logging, change in the code:
 ```javascript
 const LOG_ENABLED = false;  // Change to true
 ```
-
-This will output detailed logs showing:
-- Raw datalayer
-- Parsed data
-- Extracted arrays
-- Final output

@@ -79,11 +79,13 @@ for (var i = 0; i < list.length; i++) {
   var location = item['component.LocationEvent'] || 'na';
   var eventDetails = item['component.EventDetails'] || 'na';
 
-  // Push all values to maintain array length consistency
-  categoryArr.push(category);
-  labelArr.push(label);
-  actionArr.push(action);
-  positionArr.push(position);
+  // Deduplicate category, label, action, position
+  if (categoryArr.indexOf(category) === -1) categoryArr.push(category);
+  if (labelArr.indexOf(label) === -1) labelArr.push(label);
+  if (actionArr.indexOf(action) === -1) actionArr.push(action);
+  if (positionArr.indexOf(position) === -1) positionArr.push(position);
+
+  // Keep all values for location and event_details to preserve positional alignment
   locationArr.push(location);
   eventDetailsArr.push(eventDetails);
 }
@@ -94,18 +96,6 @@ log('Action array: ' + JSON.stringify(actionArr), 'info');
 log('Position array: ' + JSON.stringify(positionArr), 'info');
 log('Location array: ' + JSON.stringify(locationArr), 'info');
 log('Event details array: ' + JSON.stringify(eventDetailsArr), 'info');
-
-// Apply sorting if enabled
-var enableSort = data.enableSort || false;
-if (enableSort) {
-  log('Sorting enabled - applying sort', 'info');
-  categoryArr.sort();
-  labelArr.sort();
-  actionArr.sort();
-  positionArr.sort();
-  locationArr.sort();
-  eventDetailsArr.sort();
-}
 
 if (!returnType) {
   return undefined;
