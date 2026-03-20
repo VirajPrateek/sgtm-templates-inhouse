@@ -122,6 +122,7 @@ switch (eventType) {
     jsonData.quantity = 1;
     jsonData.bet_type = safeTransactionProducts['bet_type'] ? safeTransactionProducts['bet_type'].toLowerCase() : undefined;
     jsonData.location_id = safeTransactionProducts['location_id'] ? safeTransactionProducts['location_id'].toLowerCase() : undefined;
+    jsonData.bet_location = safeTransactionProducts['bet_location'] ? safeTransactionProducts['bet_location'].toLowerCase() : undefined;
     finalItems.push(jsonData);
     break;
 
@@ -391,6 +392,7 @@ switch (eventType) {
             'bet_tracking_type': productsArray[i].bet_tracking_type,
             'bet_type': productsArray[i].bet_type,
             'location_id': productsArray[i].location_id,
+            'bet_location': productsArray[i].bet_location.toLowerCase(),
             'quantity': 1
           });
         }
@@ -469,6 +471,7 @@ switch (eventType) {
             'bet_tracking_type': productsArray[i].bet_tracking_type,
             'bet_type': productsArray[i].bet_type,
             'location_id': productsArray[i].location_id,
+            'bet_location': productsArray[i].bet_location.toLowerCase(),
             'quantity': 1
           });
         }
