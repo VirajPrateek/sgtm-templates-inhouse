@@ -1,98 +1,39 @@
-# Multi Selector - Usage Examples
+# Multi Selector — Examples & Behavior
 
 ## Overview
-This variable extracts and formats data from event arrays in the datalayer. It deduplicates values for category, label, action, and position, while preserving all values (with positional alignment) for location and event_details.
+Extracts and formats data from array-based datalayer events (`betFilters`, `FeedbackQuestions`).
+Deduplicates category/label/action/position. Preserves all values for location/event_details to maintain positional alignment.
 
-## Key Features
-- Deduplicates: `category_event`, `label_event`, `action_event`, `position_event`
-- Preserves all values (no dedup): `location_event`, `event_details` — to maintain index-level correlation
-- Uses `'na'` as placeholder for missing/empty values
-- Supports both stringified and object data layers
+## Behavior Summary
+- `category_event`, `label_event`, `action_event`, `position_event` → deduplicated
+- `location_event`, `event_details` → all values kept (positional alignment)
+- Missing or empty values → `'na'`
+- Supports both stringified and object datalayers
+- No `try/catch` — validates string starts with `{` before parsing
 
 ## Supported Events
-- `Event.betFilters` → reads from `betFilters` array
-- `Event.FeebackLoad` → reads from `FeedbackQuestions` array
+| Event Name | List Key |
+|---|---|
+| `Event.betFilters` | `betFilters` |
+| `Event.FeebackLoad` | `FeedbackQuestions` |
 
 ---
 
-## Example 1: Basic — All values present, repeated dimensions
+## Example 1: All values present, repeated dimensions
 
-### DataLayer Push
 ```javascript
 dataLayer.push({
   event: 'Event.FeebackLoad',
   FeedbackQuestions: [
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "question 1",
-      "component.EventDetails": "answer 1"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "question 2",
-      "component.EventDetails": "answer 2"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "question 3",
-      "component.EventDetails": "answer 3"
-    }
-  ]
-});
-```
-
-### Output
-```
-category_event  → "bingo room"                      (deduped)
-label_event     → "room interaction"                 (deduped)
-action_event    → "submit"                           (deduped)
-position_event  → "feedback form"                    (deduped)
-location_event  → "question 1|question 2|question 3" (all values)
-event_details   → "answer 1|answer 2|answer 3"      (all values)
-```
-
----
-
-## Example 2: Missing values — 'na' placeholder
-
-### DataLayer Push
-```javascript
-dataLayer.push({
-  event: 'Event.FeebackLoad',
-  FeedbackQuestions: [
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "abc",
-      "component.EventDetails": "cba"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "",
-      "component.EventDetails": "fed"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "ghi",
-      "component.EventDetails": ""
-    }
+    { "component.CategoryEvent": "bingo room", "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit", "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 1", "component.EventDetails": "answer 1" },
+    { "component.CategoryEvent": "bingo room", "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit", "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 2", "component.EventDetails": "answer 2" },
+    { "component.CategoryEvent": "bingo room", "component.LabelEvent": "room interaction",
+      "component.ActionEvent": "submit", "component.PositionEvent": "feedback form",
+      "component.LocationEvent": "question 3", "component.EventDetails": "answer 3" }
   ]
 });
 ```
@@ -103,77 +44,75 @@ category_event  → "bingo room"
 label_event     → "room interaction"
 action_event    → "submit"
 position_event  → "feedback form"
+location_event  → "question 1|question 2|question 3"
+event_details   → "answer 1|answer 2|answer 3"
+```
+
+---
+
+## Example 2: Missing/empty values → 'na' placeholder
+
+```javascript
+FeedbackQuestions: [
+  { ..., "component.LocationEvent": "abc", "component.EventDetails": "cba" },
+  { ..., "component.LocationEvent": "",    "component.EventDetails": "fed" },
+  { ..., "component.LocationEvent": "ghi", "component.EventDetails": ""    }
+]
+```
+
+### Output
+```
 location_event  → "abc|na|ghi"
 event_details   → "cba|fed|na"
 ```
 
-Index 1: location is `na` (was empty), details is `fed` — alignment preserved.
-Index 2: location is `ghi`, details is `na` (was empty) — alignment preserved.
+Index 1: location `na` (was empty) maps to details `fed` — alignment preserved.
 
 ---
 
 ## Example 3: Duplicate location/details pairs
 
-### DataLayer Push
 ```javascript
-dataLayer.push({
-  event: 'Event.FeebackLoad',
-  FeedbackQuestions: [
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "abc",
-      "component.EventDetails": "cba"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "def",
-      "component.EventDetails": "fed"
-    },
-    {
-      "component.CategoryEvent": "bingo room",
-      "component.LabelEvent": "room interaction",
-      "component.ActionEvent": "submit",
-      "component.PositionEvent": "feedback form",
-      "component.LocationEvent": "abc",
-      "component.EventDetails": "cba"
-    }
-  ]
-});
+FeedbackQuestions: [
+  { ..., "component.LocationEvent": "abc", "component.EventDetails": "cba" },
+  { ..., "component.LocationEvent": "def", "component.EventDetails": "fed" },
+  { ..., "component.LocationEvent": "abc", "component.EventDetails": "cba" }
+]
 ```
 
 ### Output
 ```
-category_event  → "bingo room"
-label_event     → "room interaction"
-action_event    → "submit"
-position_event  → "feedback form"
 location_event  → "abc|def|abc"
 event_details   → "cba|fed|cba"
 ```
 
-Duplicates in location/event_details are kept to preserve positional alignment.
+Duplicates kept in location/event_details to preserve positional alignment.
 
 ---
 
-## Configuration
+## Failure Points
+| Scenario | Result |
+|---|---|
+| `rawData` is not a string or object | Returns `undefined` |
+| String doesn't start with `{` | Returns `undefined` |
+| `JSON.parse` returns falsy | Returns `undefined` |
+| Unknown event name (no `listKey` match) | Returns `undefined` |
+| Empty or missing list array | Returns `undefined` |
+| `returnType` typo or missing | Returns `undefined` |
+| Keys renamed in datalayer | All values become `'na'` |
 
-### Return Type Options
-- `category_event` — `component.CategoryEvent` values (deduped)
-- `label_event` — `component.LabelEvent` values (deduped)
-- `action_event` — `component.ActionEvent` values (deduped)
-- `position_event` — `component.PositionEvent` values (deduped)
-- `location_event` — `component.LocationEvent` values (all, positional)
-- `event_details` — `component.EventDetails` values (all, positional)
+## Configuration
+| Return Type | Source Key | Deduped? |
+|---|---|---|
+| `category_event` | `component.CategoryEvent` | Yes |
+| `label_event` | `component.LabelEvent` | Yes |
+| `action_event` | `component.ActionEvent` | Yes |
+| `position_event` | `component.PositionEvent` | Yes |
+| `location_event` | `component.LocationEvent` | No |
+| `event_details` | `component.EventDetails` | No |
 
 ## Debugging
-
-To enable logging, change in the code:
 ```javascript
 const LOG_ENABLED = false;  // Change to true
 ```
+Outputs one line: the returnType and event name being processed.

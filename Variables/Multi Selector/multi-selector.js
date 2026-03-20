@@ -1,25 +1,14 @@
 const getEventData = require('getEventData');
 const JSON = require('JSON');
-const _logModule = require('logToConsole');
+const _log = require('logToConsole');
 const LOG_ENABLED = false;
-const log = (msg, type) => {
-  if (LOG_ENABLED) {
-    _logModule(msg, type);
-  }
-};
+const log = (msg) => { if (LOG_ENABLED) _log(msg); };
 
-// Read datalayer directly
 var rawData = getEventData('datalayer');
 var eventName = getEventData('event_name');
 var returnType = data.returnType;
 
-log('Raw datalayer: ' + rawData, 'info');
-log('Event name: ' + eventName, 'info');
-log('Return type: ' + returnType, 'info');
-
-if (!returnType) {
-  return undefined;
-}
+if (!returnType) return undefined;
 
 // Determine list key based on event name
 var listKey;
@@ -29,38 +18,22 @@ if (eventName === 'Event.betFilters') {
   listKey = 'FeedbackQuestions';
 }
 
-if (!listKey) {
-  log('No list key found for event: ' + eventName, 'warn');
-  return undefined;
-}
+if (!listKey) return undefined;
 
 // Handle both stringified and object data layers
 var parsed;
-if (typeof rawData === 'string') {
-  try {
-    parsed = JSON.parse(rawData);
-    log('Parsed stringified datalayer: ' + JSON.stringify(parsed), 'info');
-  } catch (e) {
-    log('Error parsing datalayer: ' + e, 'error');
-    return undefined;
-  }
+if (typeof rawData === 'string' && rawData.charAt(0) === '{') {
+  parsed = JSON.parse(rawData);
+  if (!parsed) return undefined;
 } else if (typeof rawData === 'object' && rawData !== null) {
   parsed = rawData;
-  log('Using object datalayer: ' + JSON.stringify(parsed), 'info');
 } else {
-  log('Invalid datalayer type: ' + typeof rawData, 'error');
   return undefined;
 }
 
 var list = parsed[listKey];
-log('List from key "' + listKey + '": ' + JSON.stringify(list), 'info');
+if (!list || !list.length) return undefined;
 
-if (!list || !list.length) {
-  log('No list found or empty list', 'warn');
-  return undefined;
-}
-
-// Build arrays maintaining position and adding 'na' for missing values
 var categoryArr = [];
 var labelArr = [];
 var actionArr = [];
@@ -71,7 +44,6 @@ var eventDetailsArr = [];
 for (var i = 0; i < list.length; i++) {
   var item = list[i];
 
-  // Extract values or use 'na' as placeholder
   var category = item['component.CategoryEvent'] || 'na';
   var label = item['component.LabelEvent'] || 'na';
   var action = item['component.ActionEvent'] || 'na';
@@ -90,46 +62,13 @@ for (var i = 0; i < list.length; i++) {
   eventDetailsArr.push(eventDetails);
 }
 
-log('Category array: ' + JSON.stringify(categoryArr), 'info');
-log('Label array: ' + JSON.stringify(labelArr), 'info');
-log('Action array: ' + JSON.stringify(actionArr), 'info');
-log('Position array: ' + JSON.stringify(positionArr), 'info');
-log('Location array: ' + JSON.stringify(locationArr), 'info');
-log('Event details array: ' + JSON.stringify(eventDetailsArr), 'info');
+log('Multi Selector: ' + returnType + ' for ' + eventName);
 
-if (!returnType) {
-  return undefined;
-}
+if (returnType === 'category_event') return categoryArr.join('|');
+if (returnType === 'label_event') return labelArr.join('|');
+if (returnType === 'action_event') return actionArr.join('|');
+if (returnType === 'position_event') return positionArr.join('|');
+if (returnType === 'location_event') return locationArr.join('|');
+if (returnType === 'event_details') return eventDetailsArr.join('|');
 
-if (returnType === 'category_event') {
-  log('Returning category_event: ' + categoryArr.join('|'), 'info');
-  return categoryArr.join('|');
-}
-
-if (returnType === 'label_event') {
-  log('Returning label_event: ' + labelArr.join('|'), 'info');
-  return labelArr.join('|');
-}
-
-if (returnType === 'action_event') {
-  log('Returning action_event: ' + actionArr.join('|'), 'info');
-  return actionArr.join('|');
-}
-
-if (returnType === 'position_event') {
-  log('Returning position_event: ' + positionArr.join('|'), 'info');
-  return positionArr.join('|');
-}
-
-if (returnType === 'location_event') {
-  log('Returning location_event: ' + locationArr.join('|'), 'info');
-  return locationArr.join('|');
-}
-
-if (returnType === 'event_details') {
-  log('Returning event_details: ' + eventDetailsArr.join('|'), 'info');
-  return eventDetailsArr.join('|');
-}
-
-log('No matching return type found: ' + returnType, 'warn');
 return undefined;
