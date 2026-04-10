@@ -97,6 +97,16 @@ switch(tp) {
       case "base64": rs = toBase64(op1); break;  
       case "jstringify": rs = JSON.stringify(data.op1); break;  
       case "jparse": rs = JSON.parse(data.op1); break;  
+      case "getParam":
+        var pairs = op1.split(op3s || "&");
+        for (var i = 0; i < pairs.length; i++) {
+          var kv = pairs[i].split("=");
+          if (kv[0] === op2s) {
+            rs = kv.length > 1 ? kv[1] : "";
+            break;
+          }
+        }
+        break;
     }    
     break;
   case "array":

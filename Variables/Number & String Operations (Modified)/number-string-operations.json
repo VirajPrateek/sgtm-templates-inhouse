@@ -210,6 +210,10 @@
       {
         "value": "jparse",
         "displayValue": "JSON.parse"
+      },
+      {
+        "value": "getParam",
+        "displayValue": "getParam (get value by key name from delimited string)"
       }
     ],
     "simpleValueType": true,
@@ -354,6 +358,11 @@
         "paramName": "stringMethodName",
         "paramValue": "splitSpecial",
         "type": "EQUALS"
+      },
+      {
+        "paramName": "stringMethodName",
+        "paramValue": "getParam",
+        "type": "EQUALS"
       }
     ]
   },
@@ -391,6 +400,11 @@
       {
         "paramName": "stringMethodName",
         "paramValue": "splitSpecial",
+        "type": "EQUALS"
+      },
+      {
+        "paramName": "stringMethodName",
+        "paramValue": "getParam",
         "type": "EQUALS"
       }
     ]

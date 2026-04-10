@@ -22,7 +22,7 @@ A Swiss-army-knife variable for performing arithmetic, math, string manipulation
 | **Operation / Method / Function** | The specific function within the selected type |
 | **Parameter 1** | First operand (always required) |
 | **Parameter 2** | Second operand (shown when needed) |
-| **Parameter 3** | Third operand (shown for replace, replaceAll, slice, substring, splitSpecial) |
+| **Parameter 3** | Third operand (shown for replace, replaceAll, slice, substring, splitSpecial, getParam) |
 | **Ignore undefined/null** | For SHA-256 only — returns the input unchanged if it's `undefined` or `null` |
 | **Result Transformation** | Post-processing: None, Round to Integer, Fixed (2 decimals), Truncate to Integer, Convert to String |
 
@@ -35,7 +35,7 @@ A Swiss-army-knife variable for performing arithmetic, math, string manipulation
 `abs`, `ceil`, `floor`, `max`, `min`, `round`, `trunc`, `pow`, `sqrt`
 
 ### String Functions
-`indexOf`, `lastIndexOf`, `split`, `splitSpecial` (split + extract by index), `toLowerCase`, `toUpperCase`, `replace`, `replaceAll`, `slice`, `substr`, `substring`, `match`, `sha256`, `base64`, `toFixed`, `toNumber`, `JSON.stringify`, `JSON.parse`
+`indexOf`, `lastIndexOf`, `split`, `splitSpecial` (split + extract by index), `getParam` (extract value by key name from delimited string), `toLowerCase`, `toUpperCase`, `replace`, `replaceAll`, `slice`, `substr`, `substring`, `match`, `sha256`, `base64`, `toFixed`, `toNumber`, `JSON.stringify`, `JSON.parse`
 
 ### Array Functions
 `length` (get array length)
@@ -69,3 +69,23 @@ A Swiss-army-knife variable for performing arithmetic, math, string manipulation
 - Param 2: `";"`
 - Param 3: `1`
 - → `"premier league"`
+
+**Get a value by key name from a cookie/query string (getParam):**
+- Operation Type: String Functions
+- Function: getParam
+- Param 1: `{{Cookie - OptanonConsent}}` → `"isGpcEnabled=0&landingPath=NotLandingPage&groups=C0001:1"`
+- Param 2: `landingPath`
+- Param 3: `&`
+- → `"NotLandingPage"`
+
+> `getParam` is position-independent — it finds the key by name regardless of where it appears in the string. This replaces the previous two-variable approach (splitSpecial → splitSpecial) which relied on key ordering and broke if the cookie structure changed.
+
+## Testing
+
+A local test harness is included to verify the template logic outside the sGTM container:
+
+```bash
+node test-local.js
+```
+
+This runs 16 tests covering `getParam` functionality including position independence, edge cases (empty values, missing keys, similar key names), and custom delimiters.
